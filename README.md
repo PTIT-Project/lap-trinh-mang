@@ -1,2 +1,2 @@
-# L-p-tr-nh-m-ng
+# Lập trình mạng
 Đội dự án môn Lập trình mạng - 2019
