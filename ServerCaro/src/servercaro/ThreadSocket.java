@@ -5,7 +5,7 @@ import java.io.DataOutputStream;
 import java.net.Socket;
 
 public class ThreadSocket extends Thread {
-	
+
 	private Socket socket;
 	private int port;
 	private database db;
@@ -34,8 +34,9 @@ public class ThreadSocket extends Thread {
 				String string = inFromClient.readLine();
 				System.out.println(string);
 				String[] ss = string.split("-");
-				if (ss[0].equals("1"))// Kiểm tra đăng nhập
-				{
+				
+				// Kiểm tra đăng nhập
+				if (ss[0].equals("1")) {
 
 					System.out.println("Username,Pwd:" + ss[1] + "," + ss[2]);
 					if (db.checkLogin(ss[1], ss[2])) {
@@ -45,12 +46,11 @@ public class ThreadSocket extends Thread {
 						outToClient.writeBytes("0\n");
 					}
 				}
-				if (ss[0].equals("2")) // Đăng ký thành viên
-				{
-					String infor;
-					String account;
-					account = "INSERT INTO `mydb`.`user` (`username`, `password`) VALUES (?,?)";
-					infor = "INSERT INTO `mydb`.`user_infomation` (`hoten`, `ngaysinh`, `email`) VALUES (?,? ,?)";
+
+				// Đăng ký thành viên
+				if (ss[0].equals("2")) {
+					String account = "INSERT INTO `caro`.`user` (`username`, `password`) VALUES (?,?)";
+					String infor = "INSERT INTO `caro`.`user_infomation` (`hoten`, `ngaysinh`, `email`) VALUES (?,? ,?)";
 					// insert account
 					db.pst = db.con.prepareStatement(account);
 					db.pst.setString(1, ss[1]);
@@ -66,7 +66,9 @@ public class ThreadSocket extends Thread {
 					db.pst.close();
 					outToClient.writeBytes("1\n");
 				}
-				if (ss[0].equals("3")) { // Tạo phòng (Server)
+				
+				// Tạo phòng chơi (Server)
+				if (ss[0].equals("3")) {
 					System.out.println("co nhay ao 3");
 					int port1 = port + 1;
 					add.port1.add(port);
@@ -77,10 +79,9 @@ public class ThreadSocket extends Thread {
 					// gui address ve client
 					outToClient.writeBytes(_string + "\n");
 				}
-
-				if (ss[0].equals("4")) // Tạo người tìm phòng (Client)
-				{
-
+				
+				// Tìm phòng chơi (Client)
+				if (ss[0].equals("4")) {
 					String _strPort1 = ""; // add.port1.get(0).toString();
 					// System.out.println(_strPort1);
 					String _strPort2 = ""; // add.port2.get(0).toString();
@@ -108,6 +109,7 @@ public class ThreadSocket extends Thread {
 						System.out.println(sss[i]);
 					}
 				}
+				
 				if (ss[0].equals("5")) {
 					int j = 0;
 					for (j = 0; j < add.name.size(); j++) {

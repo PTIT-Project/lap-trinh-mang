@@ -47,10 +47,10 @@ public class Loginsuccess extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 20)); // NOI18N
-        jLabel1.setText("Ä�Äƒng nháº­p thÃ nh cÃ´ng!!!");
+        jLabel1.setText("Đăng nhập thành công!!!");
 
         createServer.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        createServer.setText("Táº¡o server");
+        createServer.setText("Tạo server");
         createServer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createServerActionPerformed(evt);
@@ -66,7 +66,7 @@ public class Loginsuccess extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Click Ä‘á»ƒ táº¡o server!!!");
+        jLabel2.setText("Click để tạo server!!!");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Lá»±a chá»�n Ä‘á»‘i thá»§!!!");
