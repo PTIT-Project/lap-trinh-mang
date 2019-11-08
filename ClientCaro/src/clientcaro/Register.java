@@ -42,19 +42,19 @@ public class Register extends javax.swing.JFrame {
 		setTitle("Đăng ký tài khoản");
 
 		jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-		jLabel1.setText("Register");
+		jLabel1.setText("Đăng ký");
 
 		jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-		jLabel2.setText("Name:");
+		jLabel2.setText("Họ và tên:");
 
 		jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-		jLabel3.setText("Username:");
+		jLabel3.setText("Tên tài khoản:");
 
 		jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-		jLabel4.setText("Birthday:");
+		jLabel4.setText("Ngày sinh:");
 
 		jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-		jLabel5.setText("Password:");
+		jLabel5.setText("Mật khẩu:");
 
 		jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		jLabel6.setText("Email:");
@@ -62,7 +62,7 @@ public class Register extends javax.swing.JFrame {
 		t_hovaten.setName("t_hovaten"); // NOI18N
 
 		b_xacnhan.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
-		b_xacnhan.setText("Register");
+		b_xacnhan.setText("Đăng ký");
 		b_xacnhan.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				b_xacnhanActionPerformed(evt);
@@ -70,7 +70,7 @@ public class Register extends javax.swing.JFrame {
 		});
 
 		b_exit.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
-		b_exit.setText("Exit");
+		b_exit.setText("Thoát");
 		b_exit.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				b_exitActionPerformed(evt);
@@ -144,7 +144,6 @@ public class Register extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void b_xacnhanActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_b_xacnhanActionPerformed
-		// TODO add your handling code here:
 		String resSend = "2-" + t_username.getText() + "-" + t_password.getText() + "-" + t_hovaten.getText() + "-"
 				+ t_ngaysinh.getText() + "-" + t_email.getText();
 		try {
@@ -159,21 +158,22 @@ public class Register extends javax.swing.JFrame {
 				// a pop-up box
 				JOptionPane.showMessageDialog(null, "Đăng ký thành công", "Success",
 						JOptionPane.INFORMATION_MESSAGE);
-				System.exit(0);
+				
+				setVisible(false);
+				Loginsuccess loginsuccess = new Loginsuccess(inFromServer, outToServer,t_username.getText());
+//				System.exit(0);
 			} else {
-
 				JOptionPane.showMessageDialog(null, "Đăng ký thất bại!", "Failed!!", JOptionPane.ERROR_MESSAGE);
-
 			}
 		} catch (IOException ex) {
 			Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+			JOptionPane.showMessageDialog(null, "Lỗi đăng ký", "Failed!!", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}// GEN-LAST:event_b_xacnhanActionPerformed
 
 	private void b_exitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_b_exitActionPerformed
-		// TODO add your handling code here:
-		System.exit(0);
+		dispose();
 	}// GEN-LAST:event_b_exitActionPerformed
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,30 +1,36 @@
-package clientcaro;
+package clientcaro.view;
 
+import java.awt.GraphicsConfiguration;
+import java.awt.HeadlessException;
 import java.awt.event.ItemEvent;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
 
-public class Loginsuccess extends javax.swing.JFrame {
+import clientcaro.CaroClient;
+import clientcaro.CaroServer;
+import clientcaro.Loginsuccess;
 
-	/**
-	 * Creates new form Loginsuccess
-	 */
-	DataInputStream inFromServer;
-	DataOutputStream outToServer;
-	String _name;
-	address add;
+public class LoginSuccessFrm extends JFrame {
+	
 
-	public Loginsuccess(DataInputStream inFromServer, DataOutputStream outToServer, String _name) {
+	private JButton btExit;
+	private JComboBox comServer;
+	private JButton createServer;
+	private JButton jButton_loadServer;
+	private JLabel jLabel1;
+	private JLabel jLabel2;
+	private JLabel jLabel3;
+	private JLabel jLabel4;
+
+	public LoginSuccessFrm(String title) throws HeadlessException {
+		super(title);
 		setVisible(true);
 		setLocation(400, 200);
 		initComponents();
-		this.inFromServer = inFromServer;
-		this.outToServer = outToServer;
-		this._name = _name;
 	}
 
 	/**
@@ -232,14 +238,4 @@ public class Loginsuccess extends javax.swing.JFrame {
 
 	}// GEN-LAST:event_btExitActionPerformed
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton btExit;
-	private javax.swing.JComboBox comServer;
-	private javax.swing.JButton createServer;
-	private javax.swing.JButton jButton_loadServer;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
-	// End of variables declaration//GEN-END:variables
 }

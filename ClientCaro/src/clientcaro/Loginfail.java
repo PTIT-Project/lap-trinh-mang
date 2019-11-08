@@ -2,6 +2,8 @@ package clientcaro;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class Loginfail extends javax.swing.JFrame {
 
@@ -14,6 +16,16 @@ public class Loginfail extends javax.swing.JFrame {
 		initComponents();
 		this.inFromServer = inFromServer;
 		this.outToServer = outToServer;
+	}
+	
+	private boolean isExisted() {
+		ObjectInputStream ois = null;
+		try {
+			ois = new ObjectInputStream(inFromServer);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -30,13 +42,13 @@ public class Loginfail extends javax.swing.JFrame {
 		setName("Login Fail"); // NOI18N
 
 		jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-		jLabel1.setText("Ä�Äƒng nháº­p tháº¥t báº¡i.");
+		jLabel1.setText("Đăng nhập thất bại.");
 
 		jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-		jLabel2.setText("TÃ i khoáº£n khÃ´ng tá»“n táº¡i. Báº¡n cÃ³ muá»‘n táº¡o tÃ i khoáº£n má»›i?");
+		jLabel2.setText("Tài khoản không tồn tại. Bạn có muốn tạo tài khoản mới?");
 
 		jButton1.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
-		jButton1.setText("Yes");
+		jButton1.setText("Có");
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton1ActionPerformed(evt);
@@ -44,7 +56,7 @@ public class Loginfail extends javax.swing.JFrame {
 		});
 
 		jButton2.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
-		jButton2.setText("No");
+		jButton2.setText("Không");
 		jButton2.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton2ActionPerformed(evt);

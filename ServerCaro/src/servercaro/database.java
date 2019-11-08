@@ -8,7 +8,7 @@ public class database {
 	private ResultSet rs;
 
 	private static final String DB_USERNAME = "root";
-	private static final String DB_PASSWORD = "31101998";
+	private static final String DB_PASSWORD = "";
 	public static final String DB_NAME = "caro";
 	
 
@@ -18,7 +18,7 @@ public class database {
 			// MAKE SURE YOU KEEP THE mysql_connector.jar file in java/lib folder
 			// ALSO SET THE CLASSPATH
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/caro", DB_USERNAME, DB_PASSWORD);
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/caro?useSSL=false", DB_USERNAME, DB_PASSWORD);
 			pst = con.prepareStatement("SELECT * FROM user WHERE username=? AND password=?");
 
 		} catch (ClassNotFoundException e) {

@@ -72,8 +72,8 @@ public class CaroServer extends javax.swing.JFrame {
 		initComponents();
 		setVisible(true);
 		setTitle(name + " (Server)");
-		jLabel_ban.setText("Báº¡n Ä‘Ã¡nh.");
-		jLabel_doiphuong.setText("Ä�á»‘i phÆ°Æ¡ng Ä‘Ã¡nh.");
+		jLabel_ban.setText("Bạn đánh.");
+		jLabel_doiphuong.setText("Đối phương đánh.");
 		port_server1 = _portserver1; // Port dung tao server de choi game
 		port_server2 = _portserver2; // Port dung de chat khi choi game
 
@@ -133,14 +133,14 @@ public class CaroServer extends javax.swing.JFrame {
 					g.drawLine(X0 + c * Width, Y0, X0 + c * Width, Y0 + Size * Width);
 				}
 
-				// Váº½ Ã´ cÃ³ chuá»™t qua
+				// Váº½ Ã´ có chuá»™t qua
 				if (!isPause)
 					if (currentColumn < Size && currentColumn >= 0 && currentRow < Size && currentRow >= 0) {
 						g.setColor(new Color(0, 0, 0, 80));
 						g2.fillOval(X0 + currentColumn * Width + Width / 6 + 1, Y0 + currentRow * Width + Width / 6 + 1,
 								2 * Width / 3, 2 * Width / 3);
 					}
-				// Váº½ cÃ¡c vá»‹ trÃ­ Ä‘Ã£ Ä‘Ã¡nh
+				// Váº½ cÃ¡c vá»‹ trÃ­ đã đánh
 				if (checked.size() == 0)
 					return;
 				for (int p = 0; p < checked.size(); p++) {
@@ -160,7 +160,7 @@ public class CaroServer extends javax.swing.JFrame {
 					// g2.drawString(String.valueOf(p),X0+checked.get(p).x*Width+12,Y0+
 					// checked.get(p).y*Width+20);
 				}
-				// Ä�Ã¡nh dáº¥u Ã´ má»›i Ä‘Ã¡nh
+				// Ä�Ã¡nh dáº¥u Ã´ mới đánh
 				g.setColor(Color.RED);
 				g.drawRect(checked.get(checked.size() - 1).x * Width + X0,
 						checked.get(checked.size() - 1).y * Width + Y0, Width, Width);
@@ -203,7 +203,7 @@ public class CaroServer extends javax.swing.JFrame {
 		boardPanelLayout.setVerticalGroup(boardPanelLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 523, Short.MAX_VALUE));
 
-		backButton.setText("Xin Ä‘i láº¡i");
+		backButton.setText("Xin đi lại");
 		backButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				backButtonActionPerformed(evt);
@@ -257,7 +257,7 @@ public class CaroServer extends javax.swing.JFrame {
 			}
 		});
 
-		sendButton.setText("Gá»­i");
+		sendButton.setText("Gửi");
 		sendButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				sendButtonActionPerformed(evt);
@@ -340,7 +340,7 @@ public class CaroServer extends javax.swing.JFrame {
 		}
 
 		Point p = new Point();
-		// Kiá»ƒm tra vá»‹ trÃ­ cÃ³ thuá»™c bÃ n cá»� khÃ´ng?
+		// Kiểm tra vá»‹ trÃ­ có thuá»™c bÃ n cá»� không?
 		if ((currentColumn < Size && currentColumn >= 0 && currentRow < Size && currentRow >= 0)) {
 			p = new Point(currentColumn, currentRow);
 		} else {
@@ -353,16 +353,16 @@ public class CaroServer extends javax.swing.JFrame {
 			currentRow = -1;
 			boardPanel.repaint();
 			try {
-				outGame.writeObject(currentPoint);// truyá»�n thÃ´ng tin
+				outGame.writeObject(currentPoint);// truyền thông tin
 			} catch (IOException ex) {
 				Logger.getLogger(CaroServer.class.getName()).log(Level.SEVERE, null, ex);
 			}
 			if (isWin(true)) {
-				JOptionPane.showMessageDialog(this, "Báº¡n Ä‘Ã£ tháº¯ng");
+				JOptionPane.showMessageDialog(this, "Bạn đã thắng");
 				checked.removeAllElements();
 				startUser = false;
 			}
-			user = false;// tá»›i quÃ¢n Ä‘á»�
+			user = false;// tá»›i quân xanh
 			myself.suspend();
 			you.resume();
 			myselfPanel.setBorder(new LineBorder(Color.BLACK)); // bao vien ngoai cua x, hay o(nuoc danh)
@@ -410,7 +410,7 @@ public class CaroServer extends javax.swing.JFrame {
 		if (checked.size() == 0) {
 			return;
 		}
-		if (JOptionPane.showConfirmDialog(this, "Báº¡n muá»‘n xin Ä‘i láº¡i", "ThÃ´ng bÃ¡o", JOptionPane.YES_NO_OPTION,
+		if (JOptionPane.showConfirmDialog(this, "Bạn muốn xin đi lại", "Thông báo", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 			user = !user;
 			checked.remove(checked.size() - 1);
@@ -440,8 +440,8 @@ public class CaroServer extends javax.swing.JFrame {
 	}// GEN-LAST:event_typingTextFieldActionPerformed
 
 	/**
-	 * TÃ¬m xung quanh quÃ¢n vá»«a Ä‘Ã¡nh theo hÃ ng ngang, doc, chÃ©o ngang chÃ©o
-	 * chÃ­nh. Náº¿u Ä‘á»§ 5 quÃ¢n vÃ  khÃ´ng bá»‹ cháº·n 2 Ä‘áº§u thÃ¬ tháº¯ng
+	 * TÃ¬m xung quanh quân vừa đánh theo hàng ngang, doc, chÃ©o ngang chÃ©o
+	 * chÃ­nh. nếu Ä‘á»§ 5 quân và  không bị chặn 2 đầu thì thắng
 	 * 
 	 * @param user
 	 * @return
@@ -449,16 +449,16 @@ public class CaroServer extends javax.swing.JFrame {
 	public boolean isWin(boolean user) {
 		int n = 6;
 		/**
-		 * Kiá»ƒm tra sá»‘ quÃ¢n xung quanh quÃ¢n má»›i Ä‘Ã¡nh náº¿u = 4 vÃ  khÃ´ng bá»‹
-		 * cháº·n 2 Ä‘áº§u thÃ¬ tháº¯ng
+		 * Kiểm tra các quân xung quanh quân mới đánh nếu = 4 và  không bị
+		 * chặn 2 đầu thì thắng
 		 */
 		int ok = 0;
 		/**
-		 * kiá»ƒm tra cÃ³ bá»‹ cháº·n 2 Ä‘áº§u khÃ´ng
+		 * Kiểm tra có bị chặn 2 đầu không
 		 */
 		int soDauBiChan = 0;
-		int u; // u=0 náº¿u lÃ  user 1; u=1 náº¿u lÃ  user 2
-		// = (user) ? 0 : 1;// u=0 náº¿u lÃ  user 1; u=1 náº¿u lÃ  user 2
+		int u; // u=0 nếu là  user 1; u=1 nếu là  user 2
+		// = (user) ? 0 : 1;// u=0 nếu là  user 1; u=1 nếu là  user 2
 		if (startUser) {
 			if (user) {
 				u = 0;
@@ -472,7 +472,7 @@ public class CaroServer extends javax.swing.JFrame {
 				u = 0;
 			}
 		}
-		// Kiá»ƒm tra hÃ ng ngang
+		// Kiểm tra hàng ngang
 		for (int i = 1; i < n; i++) {
 			Point p = new Point(currentPoint.x + i, currentPoint.y);
 			if (!(p.x < Size)) {
@@ -485,7 +485,7 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quÃ¢n cá»§a Ä‘á»‘i thá»§ hoáº·c gáº·p Ã´ trá»‘ng
+				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
 				break;
 			}
 		}
@@ -501,14 +501,14 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quÃ¢n cá»§a Ä‘á»‘i thá»§ hoáº·c gáº·p Ã´ trá»‘ng
+				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
 				break;
 			}
 		}
 		if (ok == 4 && soDauBiChan != 2) {
 			return true;
 		}
-		// Kiá»ƒm tra hÃ ng dá»�c
+		// Kiểm tra hàng dọc
 		ok = 0;
 		soDauBiChan = 0;
 		for (int i = 1; i < n; i++) {
@@ -523,7 +523,7 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quÃ¢n cá»§a Ä‘á»‘i thá»§ hoáº·c gáº·p Ã´ trá»‘ng
+				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
 				break;
 			}
 		}
@@ -539,19 +539,19 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quÃ¢n cá»§a Ä‘á»‘i thá»§ hoáº·c gáº·p Ã´ trá»‘ng
+				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
 				break;
 			}
 		}
 		if (ok == 4 && soDauBiChan != 2) {
 			return true;
 		}
-		// Kiá»ƒm tra Ä‘Æ°á»�ng chÃ©o chÃ­nh
+		// Kiểm tra Ä‘Æ°á»�ng chÃ©o chÃ­nh
 		ok = 0;
 		soDauBiChan = 0;
 		for (int i = 1; i < n; i++) {
 			Point p = new Point(currentPoint.x + i, currentPoint.y + i);
-			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// Ã´ kiá»ƒm tra ra ngoÃ i bÃ n cá»�
+			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// Ã´ Kiểm tra ra ngoÃ i bÃ n cá»�
 				break;
 			}
 			if (checked.contains(p) && checked.indexOf(p) % 2 == u) {
@@ -561,13 +561,13 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quÃ¢n cá»§a Ä‘á»‘i thá»§ hoáº·c gáº·p Ã´ trá»‘ng
+				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
 				break;
 			}
 		}
 		for (int i = 1; i < n; i++) {
 			Point p = new Point(currentPoint.x - i, currentPoint.y - i);
-			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// Ã´ kiá»ƒm tra ra ngoÃ i bÃ n cá»�
+			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// Ã´ Kiểm tra ra ngoÃ i bÃ n cá»�
 				break;
 			}
 			if (checked.contains(p) && checked.indexOf(p) % 2 == u) {
@@ -577,19 +577,19 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quÃ¢n cá»§a Ä‘á»‘i thá»§ hoáº·c gáº·p Ã´ trá»‘ng
+				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
 				break;
 			}
 		}
 		if (ok == 4 && soDauBiChan != 2) {
 			return true;
 		}
-		// Kiá»ƒm tra Ä‘Æ°á»�ng chÃ©o phá»¥
+		// Kiểm tra Ä‘Æ°á»�ng chÃ©o phá»¥
 		ok = 0;
 		soDauBiChan = 0;
 		for (int i = 1; i < n; i++) {
 			Point p = new Point(currentPoint.x + i, currentPoint.y - i);
-			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// Ã´ kiá»ƒm tra ra ngoÃ i bÃ n cá»�
+			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// Ã´ Kiểm tra ra ngoÃ i bÃ n cá»�
 				break;
 			}
 			if (checked.contains(p) && checked.indexOf(p) % 2 == u) {
@@ -599,13 +599,13 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quÃ¢n cá»§a Ä‘á»‘i thá»§ hoáº·c gáº·p Ã´ trá»‘ng
+				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
 				break;
 			}
 		}
 		for (int i = 1; i < n; i++) {
 			Point p = new Point(currentPoint.x - i, currentPoint.y + i);
-			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// Ã´ kiá»ƒm tra ra ngoÃ i bÃ n cá»�
+			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// Ã´ Kiểm tra ra ngoÃ i bÃ n cá»�
 				break;
 			}
 			if (checked.contains(p) && checked.indexOf(p) % 2 == u) {
@@ -615,7 +615,7 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quÃ¢n cá»§a Ä‘á»‘i thá»§ hoáº·c gáº·p Ã´ trá»‘ng
+				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
 				break;
 			}
 		}
@@ -680,13 +680,13 @@ public class CaroServer extends javax.swing.JFrame {
 				}
 				this.toFront();
 				boardPanel.repaint();
-				if (isWin(false)) {// quÃ¢n Ä‘á»� tháº¯ng
-					JOptionPane.showMessageDialog(this, "Báº¡n Ä‘Ã£ thua");
+				if (isWin(false)) {// quân xanh thắng
+					JOptionPane.showMessageDialog(this, "Bạn đã thua");
 					startUser = true;
 					checked.removeAllElements();
 					boardPanel.repaint();
 				}
-				user = true;// quÃ¢n Ä‘en
+				user = true;// quân đen
 				isPause = false;
 				you.suspend();
 				myself.resume();
@@ -775,12 +775,12 @@ public class CaroServer extends javax.swing.JFrame {
 	private int currentColumn = -1;
 	private Point currentPoint = new Point();
 	/**
-	 * true lÃ  user 1(mÃ u Ä‘en) false lÃ  user 2(mÃ u Ä‘á»�)
+	 * true là  user 1(màu đen) false là  user 2(màu xanh)
 	 */
 	private boolean user = true;
 	/**
-	 * Vá»‹ trÃ­ cháºµn lÆ°u cÃ¡c Ä‘iá»ƒm Ä‘Ã£ Ä‘Ã¡nh cá»§a user 1 Vá»‹ trÃ­ láº»
-	 * lÆ°u cÃ¡c Ä‘iá»ƒm Ä‘Ã£ Ä‘Ã¡nh cá»§a user 2
+	 * Vá»‹ trÃ­ cháºµn lÆ°u cÃ¡c điá»ƒm đã đánh cá»§a user 1 Vá»‹ trÃ­ láº»
+	 * lÆ°u cÃ¡c điá»ƒm đã đánh cá»§a user 2
 	 */
 	private Vector<Point> checked = new Vector<Point>();
 	PlayNow myself;
@@ -795,6 +795,6 @@ public class CaroServer extends javax.swing.JFrame {
 	ObjectOutputStream outGame = null;
 	String line;
 	boolean isPause = false;
-	boolean startUser = true;// quÃ¢n Ä‘en Ä‘i trÆ°á»›c
+	boolean startUser = true;// quân đen đi trước
 	private Image img = new ImageIcon(this.getClass().getResource("/images/im.png")).getImage();
 }

@@ -3,6 +3,7 @@ package servercaro;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class ThreadSocket extends Thread {
 
@@ -50,7 +51,7 @@ public class ThreadSocket extends Thread {
 				// Đăng ký thành viên
 				if (ss[0].equals("2")) {
 					String account = "INSERT INTO `caro`.`user` (`username`, `password`) VALUES (?,?)";
-					String infor = "INSERT INTO `caro`.`user_infomation` (`hoten`, `ngaysinh`, `email`) VALUES (?,? ,?)";
+					String infor = "INSERT INTO `caro`.`user_infomation` (`hoten`, `ngaysinh`, `email`) VALUES (?,?,?)";
 					// insert account
 					db.pst = db.con.prepareStatement(account);
 					db.pst.setString(1, ss[1]);
@@ -122,6 +123,8 @@ public class ThreadSocket extends Thread {
 					add.name.remove(j);
 				}
 			}
+		} catch (SocketException e) {
+			System.out.printf("\n[WARNING]: Client kết nối ở cổng số "+port+" đã ngắt - "+ServerCaro.clock+"\n");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
