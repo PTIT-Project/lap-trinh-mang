@@ -1,11 +1,21 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package clientcaro;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author ltphong
+ */
 
 public class Register extends javax.swing.JFrame {
 
@@ -39,7 +49,7 @@ public class Register extends javax.swing.JFrame {
         b_exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ä�Äƒng kÃ½");
+        setTitle("Đăng ký");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Register");

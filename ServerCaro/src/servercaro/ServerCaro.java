@@ -1,35 +1,39 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package servercaro;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Vector;
+
+/**
+ *
+ * @author ltphong
+ */
 
 public class ServerCaro {
 
-	private static int port = 1000;
-	//Time for logging
-	private static LocalDateTime clock = LocalDateTime.now();
-
-	private static ServerSocket serverSocket;
-
-	public static void main(String[] args) {
-		try {
-			serverSocket = new ServerSocket(8888);
-			System.out.println("[INFO] - Server has started successful - "+clock);
-			while (true) { // Server always runs.
-				/**
-				 * Multi-thread to create multi-socket for multiple Clients connect at the same
-				 * time.
-				 */
-				// if connect successful then start new thread.
-				new ThreadSocket(serverSocket.accept(), port).start();
-				
-				System.out.println("[INFO] - A client has connected - "+clock);
-				// Changing port
-				port = port + 2;
-			}
-		} catch (IOException e) {
-			System.err.println("[ERROR]: " + e.getMessage()+" - "+clock);
+    /**
+     * @param args the command line arguments
+     */          static int port = 1000;
+		public static void main(String[] args) {
+			// TODO Auto-generated method stub
+                   
+                 try{
+	            ServerSocket serverSocket = new ServerSocket(8888); //Cai nay la tap port cho may chu Sever caro ne.
+	            System.out.println("Khởi chạy máy chủ thành công");
+	            while(true){ // true co nghia la no luon chay va cho ket noi
+	                //Tạo Thread mới khi có 1 Client kết nối thành công
+	                new ThreadSocket(serverSocket.accept(), port).start(); // co ket noi no se tao Thread va start. 
+	                System.out.println("Có 1 kết nối đến");
+                        port = port + 2;
+	            }
+	        }
+	        catch(IOException e){
+	            System.out.println("Exception: " +e.getMessage());
 		}
 	}
 }

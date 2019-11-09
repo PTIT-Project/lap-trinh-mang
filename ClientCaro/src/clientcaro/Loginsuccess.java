@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package clientcaro;
 
 import java.awt.event.ItemEvent;
@@ -7,7 +11,12 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author ltphong
+ */
 public class Loginsuccess extends javax.swing.JFrame {
 
     /**
@@ -17,6 +26,7 @@ public class Loginsuccess extends javax.swing.JFrame {
     DataOutputStream outToServer;
     String _name;
     address add;
+
     public Loginsuccess(DataInputStream inFromServer, DataOutputStream outToServer, String _name) {
         setVisible(true);
         setLocation(400, 200);
@@ -47,10 +57,10 @@ public class Loginsuccess extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 20)); // NOI18N
-        jLabel1.setText("Ä�Äƒng nháº­p thÃ nh cÃ´ng!!!");
+        jLabel1.setText("Đăng nhập thành công!!!");
 
         createServer.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        createServer.setText("Táº¡o server");
+        createServer.setText("Tạo server");
         createServer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createServerActionPerformed(evt);
@@ -66,10 +76,10 @@ public class Loginsuccess extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Click Ä‘á»ƒ táº¡o server!!!");
+        jLabel2.setText("Click để tạo server!!!");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Lá»±a chá»�n Ä‘á»‘i thá»§!!!");
+        jLabel3.setText("Lựa chọn đối thủ!!!");
 
         comServer.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -154,23 +164,27 @@ public class Loginsuccess extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createServerActionPerformed
-       // TODO add your handling code here:
+        // TODO add your handling code here:
         String _taoServer = "3-" + _name;
         //CaroServer CaroServer = new CaroServer(1000, 1001); 
         try {
             //gui len server
             outToServer.writeBytes(_taoServer + "\n"); //may cho \n chi vay
-             //Ä�á»�c dá»¯ liá»‡u Server gá»­i vá»� 
-             String _string= inFromServer.readLine();
+            //Đọc dữ liệu Server gửi về 
+            String _string = inFromServer.readLine();
+            System.out.println("[LOGIN-SUCCESS]: Dia chi kem port Server gui ve co dang: " + _string);
             String[] addr = _string.split("-");
             int _port1 = Integer.parseInt(addr[1]);
             int _port2 = Integer.parseInt(addr[2]);
-            CaroServer CaroServer = new CaroServer(_port1, _port2, _name); 
+
+            System.out.println("[LOGIN-SUCCESS]: 2 port server gui ve la: " + _port1 + " | " + _port2);
+            CaroServer caroServer = new CaroServer(_port1, _port2, _name);
             setVisible(false);
             //System.exit(1);
         } catch (IOException ex) {
+            System.err.println("[LOGIN-SUCCESS]: Loi khi nhan port tu Server");
             Logger.getLogger(Loginsuccess.class.getName()).log(Level.SEVERE, null, ex);
-        }     
+        }
     }//GEN-LAST:event_createServerActionPerformed
 
     private void comServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comServerActionPerformed
@@ -180,68 +194,61 @@ public class Loginsuccess extends javax.swing.JFrame {
 
     private void jButton_loadServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_loadServerActionPerformed
         // TODO add your handling code here:
-         String _choigame= "4-aaa";
+        String _choigame = "4-aaa";
         try {
             //gui len server
             outToServer.writeBytes(_choigame + "\n");
-             //Ä�á»�c dá»¯ liá»‡u Server gá»­i vá»� 
-            String _strPort1 =inFromServer.readLine();
-            String[] _cutPort1  = _strPort1.split("-");
-            for(int i =0; i < _cutPort1.length; i++)
-            {
+            //Đọc dữ liệu Server gửi về 
+            String _strPort1 = inFromServer.readLine();
+            String[] _cutPort1 = _strPort1.split("-");
+            for (int i = 0; i < _cutPort1.length; i++) {
                 add.port1.add(Integer.parseInt(_cutPort1[i]));
-                
+
             }
-            String _strPort2 =inFromServer.readLine();
-            String[]_cutPort2  = _strPort2.split("-");
-            for(int i =0; i < _cutPort2.length; i++)
-            {
+            String _strPort2 = inFromServer.readLine();
+            String[] _cutPort2 = _strPort2.split("-");
+            for (int i = 0; i < _cutPort2.length; i++) {
                 add.port2.add(Integer.parseInt(_cutPort2[i]));
-                
+
             }
-            String _strIp =inFromServer.readLine();
-            String[] _cutIp  = _strIp.split("-");
-            for(int i =0; i < _cutIp.length; i++)
-            {
+            String _strIp = inFromServer.readLine();
+            String[] _cutIp = _strIp.split("-");
+            for (int i = 0; i < _cutIp.length; i++) {
                 add.ip.add(_cutIp[i]);
-                
+
             }
-            String _strName =inFromServer.readLine();
-            String[]_cutName  = _strName.split("-");
-            for(int i =0; i < _cutName.length; i++)
-            {
+            String _strName = inFromServer.readLine();
+            String[] _cutName = _strName.split("-");
+            for (int i = 0; i < _cutName.length; i++) {
                 add.name.add(_cutName[i]);
-                
+
             }
         } catch (IOException ex) {
             Logger.getLogger(Loginsuccess.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         DefaultComboBoxModel model = new DefaultComboBoxModel();
-        model.addElement("Chá»�n Ä‘á»‘i thá»§:");
-        for(int i = 0; i< add.name.size(); i++)
-        {
-             model.addElement(add.name.get(i));
+        model.addElement("Chọn đối thủ:");
+        for (int i = 0; i < add.name.size(); i++) {
+            model.addElement(add.name.get(i));
         }
         comServer.setModel(model);
     }//GEN-LAST:event_jButton_loadServerActionPerformed
 
     private void comServerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comServerItemStateChanged
         // TODO add your handling code here:
-        if(evt.getStateChange()== ItemEvent.SELECTED)
-        {
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             //JOptionPane.showMessageDialog(null, evt.getItem());
             int i = 0;
-            for(i =0; i<add.name.size(); i++)
-            {
-                if(evt.getItem() == add.name.get(i))
+            for (i = 0; i < add.name.size(); i++) {
+                if (evt.getItem() == add.name.get(i)) {
                     break;
-                  
+                }
+
             }
-            CaroClient caroclient = new CaroClient("127.0.0.1", add.port1.get(i), add.port2.get(i), _name);
+            CaroClient caroclient = new CaroClient(IpAddress.getIpAddress(), add.port1.get(i), add.port2.get(i), _name);
             //remove server sau khi da duoc chon
-              String _choigame= "5-" + evt.getItem();
+            String _choigame = "5-" + evt.getItem();
             try {
                 //gui len server
                 outToServer.writeBytes(_choigame + "\n");
