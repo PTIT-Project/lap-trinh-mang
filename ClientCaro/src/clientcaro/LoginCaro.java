@@ -1,25 +1,35 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package clientcaro;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import static java.lang.System.in;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+
+/**
+ *
+ * @author ltphong
+ */
 public class LoginCaro extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
-    DataInputStream inFromServer;
-    DataOutputStream outToServer;
+    DataInputStream inFromServer = null;
+    DataOutputStream outToServer = null;
     public LoginCaro(DataInputStream inFromServer, DataOutputStream outToServer) {
-        setVisible(true);
-        setLocation(400, 200);
-        initComponents();
         this.inFromServer = inFromServer;
         this.outToServer = outToServer;
+//        setLocation(400, 200);
+        initComponents();
+        setVisible(true);
     }
 
     /**
@@ -32,8 +42,8 @@ public class LoginCaro extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         t_password = new javax.swing.JPasswordField();
         t_username = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -45,14 +55,11 @@ public class LoginCaro extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Login");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Username:");
-        jLabel2.setToolTipText("");
-        jLabel2.setName("l_username"); // NOI18N
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Password:");
         jLabel3.setName("l_password"); // NOI18N
+
+        jLabel2.setText("Username:");
 
         t_password.setName("t_password"); // NOI18N
 
@@ -91,9 +98,9 @@ public class LoginCaro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(t_username, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(t_password, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -116,8 +123,8 @@ public class LoginCaro extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(t_username, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                    .addComponent(t_username, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -137,7 +144,7 @@ public class LoginCaro extends javax.swing.JFrame {
         // TODO add your handling code here:
         
                 char[] temp_pwd=t_password.getPassword();
-                String pwd=null;
+                String pwd= "";
                 pwd=String.copyValueOf(temp_pwd);
                 //gui username va password len server
                 String loginsend = "1-" + t_username.getText() + "-" + pwd;
@@ -163,6 +170,7 @@ public class LoginCaro extends javax.swing.JFrame {
                         }
                        // System.exit(1);
                 } catch (IOException ex) {
+                    System.err.println("Loi o day");
                     Logger.getLogger(LoginCaro.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
@@ -171,10 +179,12 @@ public class LoginCaro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
        Register register = new Register(inFromServer, outToServer);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton3ActionPerformed
 

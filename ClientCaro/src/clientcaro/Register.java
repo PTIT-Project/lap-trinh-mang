@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package clientcaro;
 
 import java.io.DataInputStream;
@@ -7,6 +11,11 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author ltphong
+ */
 
 public class Register extends javax.swing.JFrame {
 
@@ -187,6 +196,7 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_b_xacnhanActionPerformed
 
     private void b_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_exitActionPerformed
+        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_b_exitActionPerformed
 

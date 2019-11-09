@@ -1,5 +1,15 @@
 package clientcaro;
 
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/*
+ * Caro.java
+ *
+ * Created on Dec 26, 2011, 3:39:22 PM
+ */
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -19,13 +29,17 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
+/**
+ *
+ * @author Kien
+ */
 public class CaroClient extends javax.swing.JFrame {
 
     /** Creates new form Caro */
-    public CaroClient() {
+    public CaroClient()
+    {
         setVisible(true);
     }
-    
     public CaroClient(String ip,final Integer port1,final Integer port2, String name) {
         initComponents();
         setTitle(name+ " (Client)");

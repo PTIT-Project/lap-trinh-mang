@@ -1,9 +1,18 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package clientcaro;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
+/**
+ *
+ * @author ltphong
+ */
 public class Loginfail extends javax.swing.JFrame {
+
 
     DataInputStream inFromServer;
     DataOutputStream outToServer;
@@ -86,12 +95,15 @@ public class Loginfail extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
          Register register = new Register(inFromServer, outToServer);
          setVisible(false);
+         
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

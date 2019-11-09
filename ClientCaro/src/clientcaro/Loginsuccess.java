@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package clientcaro;
 
 import java.awt.event.ItemEvent;
@@ -9,6 +13,10 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author ltphong
+ */
 public class Loginsuccess extends javax.swing.JFrame {
 
     /**
@@ -18,6 +26,7 @@ public class Loginsuccess extends javax.swing.JFrame {
     DataOutputStream outToServer;
     String _name;
     address add;
+
     public Loginsuccess(DataInputStream inFromServer, DataOutputStream outToServer, String _name) {
         setVisible(true);
         setLocation(400, 200);
@@ -155,90 +164,91 @@ public class Loginsuccess extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createServerActionPerformed
+        // TODO add your handling code here:
         String _taoServer = "3-" + _name;
         //CaroServer CaroServer = new CaroServer(1000, 1001); 
         try {
             //gui len server
             outToServer.writeBytes(_taoServer + "\n"); //may cho \n chi vay
-             //Đọc dữ liệu Server gửi về 
-             String _string= inFromServer.readLine();
+            //Đọc dữ liệu Server gửi về 
+            String _string = inFromServer.readLine();
+            System.out.println("[LOGIN-SUCCESS]: Dia chi kem port Server gui ve co dang: " + _string);
             String[] addr = _string.split("-");
             int _port1 = Integer.parseInt(addr[1]);
             int _port2 = Integer.parseInt(addr[2]);
-            CaroServer CaroServer = new CaroServer(_port1, _port2, _name); 
+
+            System.out.println("[LOGIN-SUCCESS]: 2 port server gui ve la: " + _port1 + " | " + _port2);
+            CaroServer caroServer = new CaroServer(_port1, _port2, _name);
             setVisible(false);
             //System.exit(1);
         } catch (IOException ex) {
+            System.err.println("[LOGIN-SUCCESS]: Loi khi nhan port tu Server");
             Logger.getLogger(Loginsuccess.class.getName()).log(Level.SEVERE, null, ex);
-        }     
+        }
     }//GEN-LAST:event_createServerActionPerformed
 
     private void comServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comServerActionPerformed
+        // TODO add your handling code here:
 
     }//GEN-LAST:event_comServerActionPerformed
 
     private void jButton_loadServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_loadServerActionPerformed
-         String _choigame= "4-aaa";
+        // TODO add your handling code here:
+        String _choigame = "4-aaa";
         try {
             //gui len server
             outToServer.writeBytes(_choigame + "\n");
-             //Đọc dữ liệu Server gửi về 
-            String _strPort1 =inFromServer.readLine();
-            String[] _cutPort1  = _strPort1.split("-");
-            for(int i =0; i < _cutPort1.length; i++)
-            {
+            //Đọc dữ liệu Server gửi về 
+            String _strPort1 = inFromServer.readLine();
+            String[] _cutPort1 = _strPort1.split("-");
+            for (int i = 0; i < _cutPort1.length; i++) {
                 add.port1.add(Integer.parseInt(_cutPort1[i]));
-                
+
             }
-            String _strPort2 =inFromServer.readLine();
-            String[]_cutPort2  = _strPort2.split("-");
-            for(int i =0; i < _cutPort2.length; i++)
-            {
+            String _strPort2 = inFromServer.readLine();
+            String[] _cutPort2 = _strPort2.split("-");
+            for (int i = 0; i < _cutPort2.length; i++) {
                 add.port2.add(Integer.parseInt(_cutPort2[i]));
-                
+
             }
-            String _strIp =inFromServer.readLine();
-            String[] _cutIp  = _strIp.split("-");
-            for(int i =0; i < _cutIp.length; i++)
-            {
+            String _strIp = inFromServer.readLine();
+            String[] _cutIp = _strIp.split("-");
+            for (int i = 0; i < _cutIp.length; i++) {
                 add.ip.add(_cutIp[i]);
-                
+
             }
-            String _strName =inFromServer.readLine();
-            String[]_cutName  = _strName.split("-");
-            for(int i =0; i < _cutName.length; i++)
-            {
+            String _strName = inFromServer.readLine();
+            String[] _cutName = _strName.split("-");
+            for (int i = 0; i < _cutName.length; i++) {
                 add.name.add(_cutName[i]);
-                
+
             }
         } catch (IOException ex) {
             Logger.getLogger(Loginsuccess.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         model.addElement("Chọn đối thủ:");
-        for(int i = 0; i< add.name.size(); i++)
-        {
-             model.addElement(add.name.get(i));
+        for (int i = 0; i < add.name.size(); i++) {
+            model.addElement(add.name.get(i));
         }
         comServer.setModel(model);
     }//GEN-LAST:event_jButton_loadServerActionPerformed
 
     private void comServerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comServerItemStateChanged
-        if(evt.getStateChange()== ItemEvent.SELECTED)
-        {
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             //JOptionPane.showMessageDialog(null, evt.getItem());
             int i = 0;
-            for(i =0; i<add.name.size(); i++)
-            {
-                if(evt.getItem() == add.name.get(i))
+            for (i = 0; i < add.name.size(); i++) {
+                if (evt.getItem() == add.name.get(i)) {
                     break;
-                  
+                }
+
             }
-            CaroClient caroclient = new CaroClient("127.0.0.1", add.port1.get(i), add.port2.get(i), _name);
+            CaroClient caroclient = new CaroClient(IpAddress.getIpAddress(), add.port1.get(i), add.port2.get(i), _name);
             //remove server sau khi da duoc chon
-              String _choigame= "5-" + evt.getItem();
+            String _choigame = "5-" + evt.getItem();
             try {
                 //gui len server
                 outToServer.writeBytes(_choigame + "\n");
@@ -250,6 +260,7 @@ public class Loginsuccess extends javax.swing.JFrame {
     }//GEN-LAST:event_comServerItemStateChanged
 
     private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
+        // TODO add your handling code here:
         System.exit(1);
 
     }//GEN-LAST:event_btExitActionPerformed
