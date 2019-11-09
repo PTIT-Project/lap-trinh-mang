@@ -3,10 +3,10 @@ Dự án môn Lập trình mạng: Trò chơi Cờ caro sử dụng Java Socket 
 
 ## Usage:
 ### Database
-*NOTE: Câu lệnh tạm thời tạo ra schema tên "caro", hãy sửa lại thành "mydb" trước khi sử dụng.*
+> *NOTE:  Schema tên ~~`caro`~~ đã bị loại bỏ, thay vào đó hãy tạo schema tên `mydb` trước khi sử dụng.*
 Tạo schema tên `mydb` chứa 2 bảng `user` và `user_infomation`, có thể sử dụng các file chứa trong thư mục `dumps`.
 ### Khởi chạy phía Server
-*NOTE: Hãy import các file trong thư mục driver vào project phía Server trước khi khởi chạy*.
+> *NOTE: Hãy import các file trong thư mục driver vào project phía Server trước khi khởi chạy*.
 Khởi chạy `ServerCaro.class`.
 ### Khởi chạy phía Client
 Trong phiên bản hiện tại, trước khi khởi chạy, cần xác định trước IP phía **chủ phòng chơi**. Điền IP vào hàm khởi tạo CaroClient() trong `CaroClient.class`. Khởi chạy `ClientCaro.class`.
