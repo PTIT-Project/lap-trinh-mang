@@ -17,7 +17,6 @@ public class ThreadSocket extends Thread {
 		port = i;
 		db = new database();
 		// add = new address();
-
 	}
 
 	@Override

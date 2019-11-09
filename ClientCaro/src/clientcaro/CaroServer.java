@@ -30,6 +30,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 class AddClient implements Runnable {
 
@@ -124,7 +126,7 @@ public class CaroServer extends javax.swing.JFrame {
 				this.setOpaque(false);
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-				// Váº½ bÃ n cá»�
+				// Vẽ bàn cờ
 				g.setColor(Color.GRAY);
 				for (int r = 0; r <= Size; r++) {
 					g.drawLine(X0, Y0 + r * Width, X0 + Size * Width, Y0 + r * Width);
@@ -133,14 +135,14 @@ public class CaroServer extends javax.swing.JFrame {
 					g.drawLine(X0 + c * Width, Y0, X0 + c * Width, Y0 + Size * Width);
 				}
 
-				// Váº½ Ã´ có chuá»™t qua
+				// Vẽ ô có chuột qua
 				if (!isPause)
 					if (currentColumn < Size && currentColumn >= 0 && currentRow < Size && currentRow >= 0) {
 						g.setColor(new Color(0, 0, 0, 80));
 						g2.fillOval(X0 + currentColumn * Width + Width / 6 + 1, Y0 + currentRow * Width + Width / 6 + 1,
 								2 * Width / 3, 2 * Width / 3);
 					}
-				// Váº½ cÃ¡c vá»‹ trÃ­ đã đánh
+				// Vẽ các vị trí đã đánh
 				if (checked.size() == 0)
 					return;
 				for (int p = 0; p < checked.size(); p++) {
@@ -160,7 +162,7 @@ public class CaroServer extends javax.swing.JFrame {
 					// g2.drawString(String.valueOf(p),X0+checked.get(p).x*Width+12,Y0+
 					// checked.get(p).y*Width+20);
 				}
-				// Ä�Ã¡nh dáº¥u Ã´ mới đánh
+				// Đánh dấu ô mới đánh
 				g.setColor(Color.RED);
 				g.drawRect(checked.get(checked.size() - 1).x * Width + X0,
 						checked.get(checked.size() - 1).y * Width + Y0, Width, Width);
@@ -340,7 +342,7 @@ public class CaroServer extends javax.swing.JFrame {
 		}
 
 		Point p = new Point();
-		// Kiểm tra vá»‹ trÃ­ có thuá»™c bÃ n cá»� không?
+		// Kiểm tra vị trí có thuộc bàn cờ không?
 		if ((currentColumn < Size && currentColumn >= 0 && currentRow < Size && currentRow >= 0)) {
 			p = new Point(currentColumn, currentRow);
 		} else {
@@ -362,7 +364,7 @@ public class CaroServer extends javax.swing.JFrame {
 				checked.removeAllElements();
 				startUser = false;
 			}
-			user = false;// tá»›i quân xanh
+			user = false;// tới quân đỏ
 			myself.suspend();
 			you.resume();
 			myselfPanel.setBorder(new LineBorder(Color.BLACK)); // bao vien ngoai cua x, hay o(nuoc danh)
@@ -440,8 +442,8 @@ public class CaroServer extends javax.swing.JFrame {
 	}// GEN-LAST:event_typingTextFieldActionPerformed
 
 	/**
-	 * TÃ¬m xung quanh quân vừa đánh theo hàng ngang, doc, chÃ©o ngang chÃ©o
-	 * chÃ­nh. nếu Ä‘á»§ 5 quân và  không bị chặn 2 đầu thì thắng
+	 * Tìm xung quanh quân vừa đánh theo hàng ngang, doc, chéo ngang chéo chính. Nếu
+	 * đủ 5 quân và không bị chặn 2 đầu thì thắng
 	 * 
 	 * @param user
 	 * @return
@@ -449,16 +451,16 @@ public class CaroServer extends javax.swing.JFrame {
 	public boolean isWin(boolean user) {
 		int n = 6;
 		/**
-		 * Kiểm tra các quân xung quanh quân mới đánh nếu = 4 và  không bị
-		 * chặn 2 đầu thì thắng
+		 * Kiểm tra số quân xung quanh quân mới đánh nếu = 4 và không bị chặn 2 đầu thì
+		 * thắng
 		 */
 		int ok = 0;
 		/**
-		 * Kiểm tra có bị chặn 2 đầu không
+		 * kiểm tra có bị chặn 2 đầu không
 		 */
 		int soDauBiChan = 0;
-		int u; // u=0 nếu là  user 1; u=1 nếu là  user 2
-		// = (user) ? 0 : 1;// u=0 nếu là  user 1; u=1 nếu là  user 2
+		int u; // u=0 nếu là user 1; u=1 nếu là user 2
+		// = (user) ? 0 : 1;// u=0 nếu là user 1; u=1 nếu là user 2
 		if (startUser) {
 			if (user) {
 				u = 0;
@@ -485,7 +487,7 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
+				// Gặp quân của đối thủ hoặc gặp ô trống
 				break;
 			}
 		}
@@ -501,7 +503,7 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
+				// Gặp quân của đối thủ hoặc gặp ô trống
 				break;
 			}
 		}
@@ -523,7 +525,7 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
+				// Gặp quân của đối thủ hoặc gặp ô trống
 				break;
 			}
 		}
@@ -539,19 +541,19 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
+				// Gặp quân của đối thủ hoặc gặp ô trống
 				break;
 			}
 		}
 		if (ok == 4 && soDauBiChan != 2) {
 			return true;
 		}
-		// Kiểm tra Ä‘Æ°á»�ng chÃ©o chÃ­nh
+		// Kiểm tra đường chéo chính
 		ok = 0;
 		soDauBiChan = 0;
 		for (int i = 1; i < n; i++) {
 			Point p = new Point(currentPoint.x + i, currentPoint.y + i);
-			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// Ã´ Kiểm tra ra ngoÃ i bÃ n cá»�
+			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// ô kiểm tra ra ngoài bàn cờ
 				break;
 			}
 			if (checked.contains(p) && checked.indexOf(p) % 2 == u) {
@@ -561,13 +563,13 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
+				// Gặp quân của đối thủ hoặc gặp ô trống
 				break;
 			}
 		}
 		for (int i = 1; i < n; i++) {
 			Point p = new Point(currentPoint.x - i, currentPoint.y - i);
-			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// Ã´ Kiểm tra ra ngoÃ i bÃ n cá»�
+			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// ô kiểm tra ra ngoài bàn cờ
 				break;
 			}
 			if (checked.contains(p) && checked.indexOf(p) % 2 == u) {
@@ -577,19 +579,19 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
+				// Gặp quân của đối thủ hoặc gặp ô trống
 				break;
 			}
 		}
 		if (ok == 4 && soDauBiChan != 2) {
 			return true;
 		}
-		// Kiểm tra Ä‘Æ°á»�ng chÃ©o phá»¥
+		// Kiểm tra đường chéo phụ
 		ok = 0;
 		soDauBiChan = 0;
 		for (int i = 1; i < n; i++) {
 			Point p = new Point(currentPoint.x + i, currentPoint.y - i);
-			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// Ã´ Kiểm tra ra ngoÃ i bÃ n cá»�
+			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// ô kiểm tra ra ngoài bàn cờ
 				break;
 			}
 			if (checked.contains(p) && checked.indexOf(p) % 2 == u) {
@@ -599,13 +601,13 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
+				// Gặp quân của đối thủ hoặc gặp ô trống
 				break;
 			}
 		}
 		for (int i = 1; i < n; i++) {
 			Point p = new Point(currentPoint.x - i, currentPoint.y + i);
-			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// Ã´ Kiểm tra ra ngoÃ i bÃ n cá»�
+			if (!(p.x >= 0 && p.x < Size && p.y >= 0 && p.y < Size)) {// ô kiểm tra ra ngoài bàn cờ
 				break;
 			}
 			if (checked.contains(p) && checked.indexOf(p) % 2 == u) {
@@ -615,7 +617,7 @@ public class CaroServer extends javax.swing.JFrame {
 				if (checked.contains(p) && checked.indexOf(p) % 2 != u) {
 					soDauBiChan++;
 				}
-				// Gáº·p quân cá»§a Ä‘á»‘i thá»§ hoặc gáº·p Ã´ trá»‘ng
+				// Gặp quân của đối thủ hoặc gặp ô trống
 				break;
 			}
 		}
@@ -680,7 +682,7 @@ public class CaroServer extends javax.swing.JFrame {
 				}
 				this.toFront();
 				boardPanel.repaint();
-				if (isWin(false)) {// quân xanh thắng
+				if (isWin(false)) {// quân đỏ thắng
 					JOptionPane.showMessageDialog(this, "Bạn đã thua");
 					startUser = true;
 					checked.removeAllElements();
@@ -775,12 +777,12 @@ public class CaroServer extends javax.swing.JFrame {
 	private int currentColumn = -1;
 	private Point currentPoint = new Point();
 	/**
-	 * true là  user 1(màu đen) false là  user 2(màu xanh)
+	 * true là user 1(màu đen) false là user 2(màu đỏ)
 	 */
 	private boolean user = true;
 	/**
-	 * Vá»‹ trÃ­ cháºµn lÆ°u cÃ¡c điá»ƒm đã đánh cá»§a user 1 Vá»‹ trÃ­ láº»
-	 * lÆ°u cÃ¡c điá»ƒm đã đánh cá»§a user 2
+	 * Vị trí chẵn lưu các điểm đã đánh của user 1 Vị trí lẻ lưu các điểm đã đánh
+	 * của user 2
 	 */
 	private Vector<Point> checked = new Vector<Point>();
 	PlayNow myself;

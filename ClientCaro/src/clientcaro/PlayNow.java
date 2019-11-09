@@ -1,8 +1,11 @@
 package clientcaro;
 
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+import org.omg.PortableInterceptor.USER_EXCEPTION;
 
 public class PlayNow extends Thread {
 

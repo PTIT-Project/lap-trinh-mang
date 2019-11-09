@@ -1,18 +1,23 @@
 package clientcaro.view;
 
-import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.awt.event.ItemEvent;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import clientcaro.CaroClient;
 import clientcaro.CaroServer;
 import clientcaro.Loginsuccess;
+import clientcaro.address;
 
 public class LoginSuccessFrm extends JFrame {
 	
@@ -25,6 +30,14 @@ public class LoginSuccessFrm extends JFrame {
 	private JLabel jLabel2;
 	private JLabel jLabel3;
 	private JLabel jLabel4;
+	
+	/**
+	 * Creates new form Loginsuccess
+	 */
+	private DataInputStream inFromServer;
+	private DataOutputStream outToServer;
+	private String _name;
+	private address add;
 
 	public LoginSuccessFrm(String title) throws HeadlessException {
 		super(title);
@@ -147,7 +160,8 @@ public class LoginSuccessFrm extends JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void createServerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_createServerActionPerformed
+	// GEN-FIRST:event_createServerActionPerformed
+	private void createServerActionPerformed(java.awt.event.ActionEvent evt) {
 		String _taoServer = "3-" + _name;
 		try {
 			// gui len server
@@ -169,7 +183,8 @@ public class LoginSuccessFrm extends JFrame {
 
 	}// GEN-LAST:event_comServerActionPerformed
 
-	private void jButton_loadServerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_loadServerActionPerformed
+	// GEN-FIRST:event_jButton_loadServerActionPerformed
+	private void jButton_loadServerActionPerformed(java.awt.event.ActionEvent evt) {
 		String _choigame = "4-aaa";
 		try {
 			// gui len server
@@ -211,7 +226,8 @@ public class LoginSuccessFrm extends JFrame {
 		comServer.setModel(model);
 	}// GEN-LAST:event_jButton_loadServerActionPerformed
 
-	private void comServerItemStateChanged(java.awt.event.ItemEvent evt) {// GEN-FIRST:event_comServerItemStateChanged
+	// GEN-FIRST:event_comServerItemStateChanged
+	private void comServerItemStateChanged(java.awt.event.ItemEvent evt) {
 		if (evt.getStateChange() == ItemEvent.SELECTED) {
 			// JOptionPane.showMessageDialog(null, evt.getItem());
 			int i = 0;
@@ -233,9 +249,9 @@ public class LoginSuccessFrm extends JFrame {
 		setVisible(false);
 	}// GEN-LAST:event_comServerItemStateChanged
 
-	private void btExitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btExitActionPerformed
+	// GEN-FIRST:event_btExitActionPerformed
+	private void btExitActionPerformed(java.awt.event.ActionEvent evt) {
 		System.exit(1);
-
 	}// GEN-LAST:event_btExitActionPerformed
 
 }
