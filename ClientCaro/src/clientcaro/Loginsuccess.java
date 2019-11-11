@@ -151,13 +151,19 @@ public class Loginsuccess extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * TẠO PHÒNG CHƠI, GỬI DỮ LIỆU PHÒNG TẠO VỀ SERVER
+     *
+     * @param evt
+     */
     private void createServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createServerActionPerformed
-        // TODO add your handling code here:
-        String _taoServer = "3-" + _name;
+        //Thông tin gồm: <tên case>-<tên server>-<IP server>
+        String _taoServer = "3-" + _name + "-" + IpAddress.getIpAddress();
         //CaroServer CaroServer = new CaroServer(1000, 1001); 
         try {
-            //gui len server
-            outToServer.writeBytes(_taoServer + "\n"); //may cho \n chi vay
+            //Gửi thông tin phòng lên Server
+            outToServer.writeBytes(_taoServer + "\n");
+            
             //Đọc dữ liệu Server gửi về 
             String _string = inFromServer.readLine();
             System.out.println("[LOGIN-SUCCESS]: Dia chi kem port Server gui ve co dang: " + _string);

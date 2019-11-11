@@ -32,8 +32,9 @@ public class ThreadSocket extends Thread {
                 String string = inFromClient.readLine();
                 System.out.println(string);
                 String[] ss = string.split("-");
-                if (ss[0].equals("1"))//kiem tra dang nhap
-                {
+
+                //KIỂM TRA ĐĂNG NHẬP
+                if (ss[0].equals("1")) {
 
                     System.out.println("Username,Pwd:" + ss[1] + "," + ss[2]);
                     if (db.checkLogin(ss[1], ss[2])) {
@@ -43,8 +44,11 @@ public class ThreadSocket extends Thread {
                         outToClient.writeBytes("0\n");
                     }
                 }
-                if (ss[0].equals("2")) //dang ky thanh vien
-                {
+
+                /**
+                 * ĐĂNG KÝ TÀI KHOẢN
+                 */
+                if (ss[0].equals("2")) {
                     String infor;
                     String account;
                     account = "INSERT INTO `mydb`.`user` (`username`, `password`) VALUES (?,?)";
@@ -68,13 +72,13 @@ public class ThreadSocket extends Thread {
                  * TẠO PHÒNG
                  */
                 if (ss[0].equals("3")) {
-                    System.out.println("Một Client vừa tạo phòng");
+                    System.out.println("Một người chơi ở IP: '"+ss[2]+"' vừa tạo phòng.");
                     int port1 = port + 2;
                     add.port1.add(port);
                     add.port2.add(port1);
-                    add.ip.add("127.0.0.1");
+                    add.ip.add(ss[2]);
                     add.name.add(ss[1]);
-                    String _string = "127.0.0.1-" + port + "-" + port1;
+                    String _string = ss[2]+"-" + port + "-" + port1;
                     System.out.println("IP tao Server gui ve Client: " + _string);
                     //gui address ve client
                     outToClient.writeBytes(_string + "\n");

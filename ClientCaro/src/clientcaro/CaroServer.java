@@ -84,10 +84,10 @@ public class CaroServer extends javax.swing.JFrame {
         System.out.println("[CaroServer LOG]: PORT 1 - " + port_server1);
         System.out.println("[CaroServer LOG]: PORT 2 - " + port_server2);
 
-        myself = new PlayNow(myselfPanel); //chop doi mau 
+        myself = new PlayNow(myselfPanel); //chớp đổi màu
         System.out.println("[CaroServer LOG]: Gameplay của bạn được tạo");
 
-        you = new PlayNow(youPanel); // chop doi mau
+        you = new PlayNow(youPanel); //chớp đổi màu
         System.out.println("[CaroServer LOG]: Gameplay của đối thủ được tạo");
 
         myself.start();
@@ -401,6 +401,9 @@ public class CaroServer extends javax.swing.JFrame {
 
     }//GEN-LAST:event_boardPanelMouseClicked
 
+    /**
+     * Vẽ điểm đánh lên bàn cờ
+     */
     private void boardPanelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boardPanelMouseMoved
 
         int CX = evt.getX();
@@ -467,9 +470,9 @@ public class CaroServer extends javax.swing.JFrame {
         sendButtonActionPerformed(null);
     }//GEN-LAST:event_typingTextFieldActionPerformed
     /**
-     * XÁC ĐỊNH ĐIỀU KIỆN THẮNG
-     * Tìm xung quanh quân vừa đánh theo hàng ngang, doc, chéo ngang chéo chính.
-     * Nếu đủ 5 quân và không bị chặn 2 đầu thì thắng
+     * XÁC ĐỊNH ĐIỀU KIỆN THẮNG: Tìm xung quanh quân vừa đánh theo hàng ngang,
+     * doc, chéo ngang chéo chính. Nếu đủ 5 quân và không bị chặn 2 đầu thì
+     * thắng
      *
      * @param user
      * @return boolean
@@ -481,9 +484,8 @@ public class CaroServer extends javax.swing.JFrame {
          * đầu thì thắng
          */
         int ok = 0;
-        /**
-         * kiểm tra có bị chặn 2 đầu không
-         */
+
+        //Kiểm tra có bị chặn 2 đầu không
         int soDauBiChan = 0;
         int u; //u=0 nếu là user 1; u=1 nếu là user 2
         //= (user) ? 0 : 1;// u=0 nếu là user 1; u=1 nếu là user 2
@@ -776,17 +778,7 @@ public class CaroServer extends javax.swing.JFrame {
             System.err.println("================TrayIcon could not be added.==============");
         }
     }
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//
-//            public void run() {
-//                new CaroServer(1000, 1001);
-//            }
-//        });
-//    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JPanel boardPanel;

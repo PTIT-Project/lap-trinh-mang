@@ -4,7 +4,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- *
+ * Lấy IP cục bộ
  * @author Tran Phuc
  */
 public class IpAddress {
