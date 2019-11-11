@@ -163,7 +163,7 @@ public class Loginsuccess extends javax.swing.JFrame {
         try {
             //Gửi thông tin phòng lên Server
             outToServer.writeBytes(_taoServer + "\n");
-            
+
             //Đọc dữ liệu Server gửi về 
             String _string = inFromServer.readLine();
             System.out.println("[LOGIN-SUCCESS]: Dia chi kem port Server gui ve co dang: " + _string);
@@ -190,31 +190,36 @@ public class Loginsuccess extends javax.swing.JFrame {
         try {
             //gui len server
             outToServer.writeBytes(_choigame + "\n");
-            //Đọc dữ liệu Server gửi về 
+            //Đọc dữ liệu Server gửi về
+            //PORT 1 
             String _strPort1 = inFromServer.readLine();
             String[] _cutPort1 = _strPort1.split("-");
             for (int i = 0; i < _cutPort1.length; i++) {
                 add.port1.add(Integer.parseInt(_cutPort1[i]));
-
+                System.out.println("[PORT 1]: " + Integer.parseInt(_cutPort1[i]));
             }
+            //PORT 2
             String _strPort2 = inFromServer.readLine();
             String[] _cutPort2 = _strPort2.split("-");
             for (int i = 0; i < _cutPort2.length; i++) {
                 add.port2.add(Integer.parseInt(_cutPort2[i]));
-
+                System.out.println("[PORT 2]: " + Integer.parseInt(_cutPort2[i]));
             }
+            // IP chủ phòng
             String _strIp = inFromServer.readLine();
             String[] _cutIp = _strIp.split("-");
             for (int i = 0; i < _cutIp.length; i++) {
                 add.ip.add(_cutIp[i]);
-
+                System.out.println("[IP]: " + _cutIp[i]);
             }
+            //Tên chủ phòng
             String _strName = inFromServer.readLine();
             String[] _cutName = _strName.split("-");
             for (int i = 0; i < _cutName.length; i++) {
                 add.name.add(_cutName[i]);
-
+                System.out.println("[NAME]: " + _cutName[i]);
             }
+            
         } catch (IOException ex) {
             Logger.getLogger(Loginsuccess.class.getName()).log(Level.SEVERE, null, ex);
         }

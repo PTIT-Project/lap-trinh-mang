@@ -80,7 +80,7 @@ public class ThreadSocket extends Thread {
                     add.name.add(ss[1]);
                     String _string = ss[2]+"-" + port + "-" + port1;
                     System.out.println("IP tao Server gui ve Client: " + _string);
-                    //gui address ve client
+                    //gui address ve client vừa tạo phòng
                     outToClient.writeBytes(_string + "\n");
                 }
 
