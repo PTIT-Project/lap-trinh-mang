@@ -1,15 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package servercaro;
 
 import java.util.Vector;
 
-/**
- *
- * @author ltphong
- */
 public class address {
 
     public static Vector<Integer> port1 = new Vector<Integer>();

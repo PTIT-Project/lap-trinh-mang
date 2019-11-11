@@ -1,27 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package clientcaro;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author ltphong
- */
-
 public class Register extends javax.swing.JFrame {
 
-   
     DataInputStream inFromServer;
     DataOutputStream outToServer;
+
     public Register(DataInputStream inFromServer, DataOutputStream outToServer) {
         setVisible(true);
         initComponents();
@@ -29,7 +19,6 @@ public class Register extends javax.swing.JFrame {
         this.outToServer = outToServer;
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -164,9 +153,8 @@ public class Register extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void b_xacnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_xacnhanActionPerformed
-        // TODO add your handling code here:
-        String resSend = "2-"+t_username.getText() + "-" + t_password.getText() + "-" + t_hovaten.getText() +
-                "-" + t_ngaysinh.getText()+ "-" + t_email.getText();
+        String resSend = "2-" + t_username.getText() + "-" + t_password.getText() + "-" + t_hovaten.getText()
+                + "-" + t_ngaysinh.getText() + "-" + t_email.getText();
         try {
             outToServer.writeBytes(resSend + "\n");
         } catch (IOException ex) {
@@ -175,28 +163,24 @@ public class Register extends javax.swing.JFrame {
         String string;
         try {
             string = inFromServer.readLine();
-             if(string.equals("1"))
-            {
+            if (string.equals("1")) {
                 //a pop-up box
-                JOptionPane.showMessageDialog(null, "You have register in successfully","Success",
-                                    JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "You have register in successfully", "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
-            }
-            else
-            {
+            } else {
 
-                 JOptionPane.showMessageDialog(null, "Register failed!","Failed!!",
-                                        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Register failed!", "Failed!!",
+                        JOptionPane.ERROR_MESSAGE);
 
             }
         } catch (IOException ex) {
             Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
     }//GEN-LAST:event_b_xacnhanActionPerformed
 
     private void b_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_exitActionPerformed
-        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_b_exitActionPerformed
 
