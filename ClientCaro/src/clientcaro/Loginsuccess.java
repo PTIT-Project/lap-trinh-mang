@@ -185,6 +185,11 @@ public class Loginsuccess extends javax.swing.JFrame {
 
     }//GEN-LAST:event_comServerActionPerformed
 
+    public static String[] ipHost = new String[100];
+    /**
+     * LOAD DANH SÁCH PHÒNG ĐANG CHỜ
+     * @param evt 
+     */
     private void jButton_loadServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_loadServerActionPerformed
         String _choigame = "4-aaa";
         try {
@@ -210,6 +215,7 @@ public class Loginsuccess extends javax.swing.JFrame {
             String[] _cutIp = _strIp.split("-");
             for (int i = 0; i < _cutIp.length; i++) {
                 add.ip.add(_cutIp[i]);
+                ipHost = _cutIp;
                 System.out.println("[IP]: " + _cutIp[i]);
             }
             //Tên chủ phòng
@@ -242,8 +248,8 @@ public class Loginsuccess extends javax.swing.JFrame {
                 }
 
             }
-            System.err.println("================IP: " + IpAddress.getIpAddress());
-            CaroClient caroclient = new CaroClient("IP cua chu room", add.port1.get(i), add.port2.get(i), _name);
+            System.err.println("================IP: " + ipHost[i]);
+            CaroClient caroclient = new CaroClient(ipHost[i], add.port1.get(i), add.port2.get(i), _name);
             //remove server sau khi da duoc chon
             String _choigame = "5-" + evt.getItem();
             try {
