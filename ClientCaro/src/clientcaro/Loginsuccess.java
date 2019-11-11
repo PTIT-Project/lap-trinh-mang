@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package clientcaro;
 
 import java.awt.event.ItemEvent;
@@ -11,17 +7,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 
-/**
- *
- * @author ltphong
- */
 public class Loginsuccess extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Loginsuccess
-     */
     DataInputStream inFromServer;
     DataOutputStream outToServer;
     String _name;
@@ -188,12 +176,10 @@ public class Loginsuccess extends javax.swing.JFrame {
     }//GEN-LAST:event_createServerActionPerformed
 
     private void comServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comServerActionPerformed
-        // TODO add your handling code here:
 
     }//GEN-LAST:event_comServerActionPerformed
 
     private void jButton_loadServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_loadServerActionPerformed
-        // TODO add your handling code here:
         String _choigame = "4-aaa";
         try {
             //gui len server
@@ -236,7 +222,6 @@ public class Loginsuccess extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_loadServerActionPerformed
 
     private void comServerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comServerItemStateChanged
-        // TODO add your handling code here:
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             //JOptionPane.showMessageDialog(null, evt.getItem());
             int i = 0;
@@ -246,7 +231,8 @@ public class Loginsuccess extends javax.swing.JFrame {
                 }
 
             }
-            CaroClient caroclient = new CaroClient(IpAddress.getIpAddress(), add.port1.get(i), add.port2.get(i), _name);
+            System.err.println("================IP: " + IpAddress.getIpAddress());
+            CaroClient caroclient = new CaroClient("IP cua chu room", add.port1.get(i), add.port2.get(i), _name);
             //remove server sau khi da duoc chon
             String _choigame = "5-" + evt.getItem();
             try {
@@ -260,7 +246,6 @@ public class Loginsuccess extends javax.swing.JFrame {
     }//GEN-LAST:event_comServerItemStateChanged
 
     private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
-        // TODO add your handling code here:
         System.exit(1);
 
     }//GEN-LAST:event_btExitActionPerformed

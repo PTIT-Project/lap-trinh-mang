@@ -1,15 +1,5 @@
 package clientcaro;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
- /*
- * Caro.java
- *
- * Created on Dec 26, 2011, 3:39:22 PM
- */
 import java.awt.AWTException;
 import java.awt.CheckboxMenuItem;
 import java.awt.Color;
@@ -41,8 +31,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 
 class AddClient implements Runnable {
 
@@ -63,7 +51,7 @@ class AddClient implements Runnable {
             out = new PrintWriter(client.getOutputStream(), true);
 
         } catch (IOException e) {
-            System.out.println("Accept failed: 4444");
+            e.printStackTrace();
             System.exit(-1);
         }
         while (true) {
@@ -76,10 +64,6 @@ class AddClient implements Runnable {
     }
 }
 
-/**
- *
- * @author Kien
- */
 public class CaroServer extends javax.swing.JFrame {
 
     public int port_server1 = 0;
@@ -101,16 +85,16 @@ public class CaroServer extends javax.swing.JFrame {
         System.out.println("[CaroServer LOG]: PORT 2 - " + port_server2);
 
         myself = new PlayNow(myselfPanel); //chop doi mau 
-        System.out.println("[CaroServer LOG]: Gameplay cua ban duoc tao.");
+        System.out.println("[CaroServer LOG]: Gameplay của bạn được tạo");
 
         you = new PlayNow(youPanel); // chop doi mau
-        System.out.println("[CaroServer LOG]: Gameplay cua doi thu duoc tao.");
+        System.out.println("[CaroServer LOG]: Gameplay của đối thủ được tạo");
 
         myself.start();
-        System.out.println("[CaroServer LOG]: Gameplay cua ban da chay.");
+        System.out.println("[CaroServer LOG]: Gameplay của bạn đã chạy");
 
         you.start();
-        System.out.println("[CaroServer LOG]: Gameplay cua doi thu da chay.");
+        System.out.println("[CaroServer LOG]: Gameplay đối thủ đã chạy");
 
         you.suspend();
 
@@ -132,12 +116,12 @@ public class CaroServer extends javax.swing.JFrame {
 
             public ListenGame() {
                 start();
-                System.out.println("[CaroServer LOG]: Listen game started");
+                System.out.println("[CaroServer LOG]: ListenGame started");
             }
 
             @Override
             public void run() {
-                System.out.println("[CaroServer LOG]: Listen game starts run method");
+                System.out.println("[CaroServer LOG]: ListenGame starts run method");
                 listenSocketGamne();
             }
         }
@@ -483,11 +467,12 @@ public class CaroServer extends javax.swing.JFrame {
         sendButtonActionPerformed(null);
     }//GEN-LAST:event_typingTextFieldActionPerformed
     /**
+     * XÁC ĐỊNH ĐIỀU KIỆN THẮNG
      * Tìm xung quanh quân vừa đánh theo hàng ngang, doc, chéo ngang chéo chính.
      * Nếu đủ 5 quân và không bị chặn 2 đầu thì thắng
      *
      * @param user
-     * @return
+     * @return boolean
      */
     public boolean isWin(boolean user) {
         int n = 6;
@@ -678,7 +663,6 @@ public class CaroServer extends javax.swing.JFrame {
             InputStream i = socket.getInputStream();
             in = new ObjectInputStream(i);
         } catch (IOException e) {
-            System.out.println("Could not listen on port 4444");
             e.printStackTrace();
             System.exit(-1);
         }
@@ -714,7 +698,6 @@ public class CaroServer extends javax.swing.JFrame {
             System.out.println("[CHU PHONG]: Da tao input stream");
 
         } catch (IOException e) {
-            System.out.println("Could not listen on port 4444");
             e.printStackTrace();
             System.exit(-1);
         }
@@ -737,13 +720,14 @@ public class CaroServer extends javax.swing.JFrame {
                     checked.removeAllElements();
                     boardPanel.repaint();
                 }
-                user = true;//quân đen
+                user = true;//quân đen thắng
                 isPause = false;
                 you.suspend();
                 myself.resume();
                 youPanel.setBorder(new LineBorder(Color.BLACK));
 
             } catch (IOException ex) {
+                ex.printStackTrace();
             }
         }
     }
@@ -831,7 +815,7 @@ public class CaroServer extends javax.swing.JFrame {
      */
     private boolean user = true;
     /**
-     * Vị trí chẵn lưu các điểm đã đánh của user 1 Vị trí lẻ lưu các điểm đã
+     * Vị trí chẵn lưu các điểm đã đánh của user 1. Vị trí lẻ lưu các điểm đã
      * đánh của user 2
      */
     private Vector<Point> checked = new Vector<Point>();
@@ -851,7 +835,7 @@ public class CaroServer extends javax.swing.JFrame {
 //    private Image img = new ImageIcon(this.getClass().getClassLoader().getResource(
 //            "/images/im.png")).getImage();
 
-    private String urlImage = File.separator + "images" + File.separator;
-    private Image img = new ImageIcon(getClass().getClassLoader().getResource(
+    private final String urlImage = File.separator + "images" + File.separator;
+    private final Image img = new ImageIcon(getClass().getClassLoader().getResource(
             urlImage + "im.png")).getImage();
 }

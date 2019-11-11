@@ -1,22 +1,9 @@
 package clientcaro;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import java.awt.Color;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-import org.omg.PortableInterceptor.USER_EXCEPTION;
 
-/**
- *
- * @author Kien
- */
 public class PlayNow extends Thread {
 
     private JPanel user;

@@ -1,22 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package clientcaro;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import static java.lang.System.in;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
-
-/**
- *
- * @author ltphong
- */
 public class LoginCaro extends javax.swing.JFrame {
 
     /**
@@ -24,6 +13,7 @@ public class LoginCaro extends javax.swing.JFrame {
      */
     DataInputStream inFromServer = null;
     DataOutputStream outToServer = null;
+
     public LoginCaro(DataInputStream inFromServer, DataOutputStream outToServer) {
         this.inFromServer = inFromServer;
         this.outToServer = outToServer;
@@ -141,50 +131,41 @@ public class LoginCaro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-                char[] temp_pwd=t_password.getPassword();
-                String pwd= "";
-                pwd=String.copyValueOf(temp_pwd);
-                //gui username va password len server
-                String loginsend = "1-" + t_username.getText() + "-" + pwd;
-                try {
-                    //gui len server
-                    outToServer.writeBytes(loginsend + "\n");
-                    //Đọc dữ liệu Server gửi về 
-                    String loginrev =inFromServer.readLine();
-                    
 
-                        if(loginrev.equals("1"))
-                        {
-                            Loginsuccess loginsuccess = new Loginsuccess(inFromServer, outToServer,t_username.getText());
-                             setVisible(false);
-                        }
-                        else
-                        {
-                            if(loginrev.equals("0"))
-                            {
-                               Loginfail loginfail = new Loginfail(inFromServer, outToServer);
-                               setVisible(false);
-                            }
-                        }
-                       // System.exit(1);
-                } catch (IOException ex) {
-                    System.err.println("Loi o day");
-                    Logger.getLogger(LoginCaro.class.getName()).log(Level.SEVERE, null, ex);
+        char[] temp_pwd = t_password.getPassword();
+        String pwd = "";
+        pwd = String.copyValueOf(temp_pwd);
+        //gui username va password len server
+        String loginsend = "1-" + t_username.getText() + "-" + pwd;
+        try {
+            //gui len server
+            outToServer.writeBytes(loginsend + "\n");
+            //Đọc dữ liệu Server gửi về 
+            String loginrev = inFromServer.readLine();
+
+            if (loginrev.equals("1")) {
+                Loginsuccess loginsuccess = new Loginsuccess(inFromServer, outToServer, t_username.getText());
+                setVisible(false);
+            } else {
+                if (loginrev.equals("0")) {
+                    Loginfail loginfail = new Loginfail(inFromServer, outToServer);
+                    setVisible(false);
                 }
-                
+            }
+            // System.exit(1);
+        } catch (IOException ex) {
+            System.err.println("Loi o day");
+            Logger.getLogger(LoginCaro.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-               
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-       Register register = new Register(inFromServer, outToServer);
+        Register register = new Register(inFromServer, outToServer);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton3ActionPerformed
 
